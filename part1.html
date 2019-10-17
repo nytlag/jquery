@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Exercise 1 miscellaneous with jQuery">
+<title>HW7 - CNIT 133 -  Part 1</title>
+
+<style>
+        /* Define three CSS classes corresponding to "themes" */
+        .theme1 {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            background-color: Linen;
+            font-size: .8em;
+        }
+
+        .theme2 {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: AliceBlue;
+            font-size: .9em;
+        }
+
+        .theme3 {
+            font-family: Georgia, serif;
+            background-color: MistyRose;
+            font-size: .85em;
+        }
+
+        /* The following CSS is just for basic layout and appearance */
+        #sampleText {
+            margin: 10px 30px;
+            padding: 0 10px;
+            border: 0px ridge gray;
+        }
+
+        #themeForm, #attributeForm {
+            float: left;
+            margin-left: 30px;
+        }
+
+        input[type='radio'] {
+            margin: 0 5px 0 0;
+        }
+
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+
+        table {
+            background-color: whitesmoke;
+        }
+
+        th {
+            color: white;
+            background-color: darkslategray;
+            text-align: left;
+        }
+
+        button {
+            margin-top: 10px;
+            font-size: .8em;
+        }
+</style>
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+//https://hills.ccsf.edu/~cdasilva/cnit133/miscex1b.html
+        // Define a document ready handler
+        $(function () {
+            // Attach a click event handler to all the radio buttons in the attribute selection table
+            $("#attributeTable :radio").click(function () {
+                // The "this" variable refers to the radio button that was clicked.
+                // The HTML code defines the name attribute of the radio button as the name of the CSS property
+                // we want to set; the value of the radio button is the value we want to set the CSS property to.
+                // By doing this, the CSS of the sample text can be set easily with the following line of code:
+                $("#sampleText").css($(this).attr("name"), $(this).val());
+            });
+
+            // Attach a click event handler to the font size selection box
+            $("#fontSize").change(function () {
+                $("#sampleText").css($(this).attr("name"), $(this).val());
+            });
+
+            // Attach a click event handler to the checkboxes in the attribute selection table
+            $("#attributeTable :checkbox").change(function () {
+                $("#sampleText").css($(this).attr("name"), this.checked ? $(this).val() : "");
+            });
+
+            // Attach a click event handler to the radio buttons in the theme selection table
+            $("#themeTable :radio").click(function () {
+                // Clear specific CSS attributes that may have been set with the radio buttons in the attribute table
+                // by selecting all the one that have the checked attribute, and firing the click event
+                $("#attributeTable [checked]").click();
+
+                // Reset the select box by setting the value to ""
+                $("#fontSize").val("");
+
+                // Remove any class already set, and set the class to the one selected.
+                $("#sampleText").removeClass().addClass($(this).val());
+            });
+
+            // Attach a click event handler to the Reset All button
+            $("#resetAll").click(function () {
+                $("#themeTable [checked]").click(); // Clicks theme table elements that have a checked attribute
+                $("#attributeTable [checked]").click(); // Clicks attribute table elements that have a checked attribute
+                $("#fontSize").val(""); // Selects the font-size that has a value of ""
+                $("#attributeTable :checked").click(); // Clicks all the checkboxes that are checked (to uncheck them)
+            });
+        });
+</script>
+</head>
+
+<body>
+<h2><center>Part 1 </center></h2>
+
+<form id="attributeForm">
+    <h3> Select Options Below </h3>
+    <table id="attributeTable" border="1" cellspacing="0" cellpadding="5">
+        <tr>
+            <th>Font Family</th>
+            <th>Background Color</th>
+            <th>Font Size</th>
+            <th>Letters and Words</th>
+        </tr>
+        <tr>
+            <td>
+                <label><input type="radio" name="font-family" value='"Arial", cursive'
+                              id="comicSans">Arial</label><br>
+                <label><input type="radio" name="font-family" value='"Trebuchet MS", Helvetica, sans-serif'
+                              id="trebuchet">Trebuchet MS</label><br>
+                <label><input type="radio" name="font-family" value="Verdana, Geneva, sans-serif"
+                              id="verdana">Verdana</label><br>
+                <label><input type="radio" name="font-family" value=""
+                              id="fontFamilyDefault" checked>Default</label>
+            </td>
+            <td>
+                <label><input type="radio" name="background-color" value="Azure"
+                              id="azure">Azure</label><br>
+                <label><input type="radio" name="background-color" value="Ivory"
+                              id="ivory">Ivory</label><br>
+                <label><input type="radio" name="background-color" value="Lavender"
+                              id="lavender">Lavender</label><br>
+                <label><input type="radio" name="background-color" value=""
+                              id="bgColorDefault" checked>Default</label>
+            </td>
+            <td>
+                <label for="fontSize">Select one:</label><br>
+                <select name="font-size" size="5" id="fontSize">
+                    <option value="80%">80%</option>
+                    <option value="100%">100%</option>
+                    <option value="110%">110%</option>
+                    <option value="" selected>Default</option>
+                </select>
+            </td>
+            <td>
+                <label><input type="checkbox" name="font-weight" value="bold" id="boldCheck">bold</label><br>
+                <label><input type="checkbox" name="font-style" value="italic" id="italicCheck">italic</label><br>
+                <label><input type="checkbox" name="font-variant" value="small-caps"
+                              id="smallCapsCheck">small-caps</label><br>
+                <label><input type="checkbox" name="text-decoration" value="underline"
+                              id="underlineCheck">underline</label><br>
+            </td>
+        </tr>
+    </table>
+    <button type="button" id="resetAll">Reset All</button>
+
+</form>
+
+<br style="clear: both">
+
+<div id="sampleText">
+    <h2>Sample Message</h2>
+
+    <p>
+      This page allows to select a page layout and formatting through the use of the className property.
+      Choose at least three form elements from among
+      <br>
+      <ul>
+        <li>radio buttons,</li>
+        <li>select items,</li>
+        <li>checkboxes,</li>
+        <li>and buttons</li>
+      </ul>
+      <ul type=a>
+        <p>to allow the user to change the</p>
+        <li> background color,</li>
+        <li> font size,</li>
+        <li> font family,</li>
+        <li> font style, and</li>
+        <li> font weight.</li>
+    </p>
+</div>
+<h4>
+	<center><a href="main-ObjectModel.html"> return back to home page</a></li></center>
+</h4>
+</body>
+</html>

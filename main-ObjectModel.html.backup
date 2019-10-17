@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> CNIT 133 Homework 7 - Object Model and Event Model  </title>
+<meta charset="UTF-8">
+<meta name="description" content="hw 7">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+h2 {
+	background: url(open.png) no-repeat 0 11px;
+	padding: 10px 0 0 25px;
+	cursor: pointer;
+}
+h2.close {
+	background-image: url(close.png);
+}
+.answer {
+	margin-left: 25px;
+}
+</style>
+
+<!-- Note that you need jQuery version 1.7.1 here - do not use versiom 1.9.1 or later -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+ $('.answer').hide();
+ $('.main h2').toggle(
+		function() {
+	       $(this).next('.answer').slideDown();
+		   $(this).addClass('close');
+		},
+		function() {
+		   $(this).next('.answer').fadeOut();
+		   $(this).removeClass('close');
+	  }
+	); // end toggle
+}); // end ready
+</script>
+</head>
+
+<style>
+input {text-align: right;}
+body {background-color: #f5f5dc;}
+.body { width: 550px; margin: 0px auto;}
+</style>
+
+
+<body>
+
+<h1>  CNIT 133 Homework 7 - Object Model and Event Model </h1>
+<br>
+<div class="content">
+	<div class="main">
+<h1> Cover Page </h1>
+<h2>Part 1 </h2>
+      <div class="answer">
+        <p> Page allows to select a page layout and formatting through the use of the className property. Choose at least three form elements from among radio buttons, select items, checkboxes, and buttons to allow the user to change the background color, font size, font family, font style, and font weight. You may use JavaScript or jQuery for this
+        <br>
+      <a href="part1.html"> click here </a>
+    </p>
+
+      </div>
+      <h2>Part 2 - Navigation Bar</h2>
+      <div class="answer">
+        <p> Page displays a top navigation bar containing a link to Homework 1 through 6 and other links.
+          <br>
+          <a href="miscex3.html"> Click Here </a></p>
+      </div>
+      <h2>Part 3 - Photo slide-show</h2>
+      <div class="answer">
+        <p>Display photo slide-show using jQuery & fancyBox
+        <br>
+        <a href="part3.html"> Click Here </a></p>
+      </div>
+      <div class="answer">
+        <p>test, delete late
+        <br>
+        <a href="hw3-dataformat.html"> Click Here </a></p>
+      </div>
+</div>
+<br>
+
+
+</body>
+
+</html>
